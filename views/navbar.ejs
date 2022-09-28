@@ -1,25 +1,82 @@
 <nav class="navbar bg-light">
+  <div class="container-fluid ">
+    <ul class="nav justify-content-center">
+      <ul class="nav justify-content-center">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Rick&Morty</a>
+        </li>
+        <%if(!email) { %>
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
+          </li>
+        <% } else { %>
+          <li class="nav-item">
+            <a class="nav-link" href="/private">Private</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/logout">Logout</a>
+          </li>
+          <div class="btn-group  ">
+            <button type="button" class="btn btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              Favorites
+            </button>
+            <ul class="dropdown-menu p-2">
+              <div class="d-flex justify-content-between">
+                <li id="favs"></li>
+                <button onclick="delete_favorite(person_favorite)">
+                  <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                      class="bi bi-trash-fill" viewBox="0 0 16 16">
+                      <path
+                        d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                    </svg>
+                  </span>
+                </button>
+                
+              </div>
+              <script>
+                let person_favorite = JSON.parse(localStorage.getItem('favorites'))
+                console.log(person_favorite)
+                document.getElementById('favs').innerHTML = person_favorite;
+              </script>
+            </ul>
+          </div>
+        <% } %>
+      </ul>
+    </ul>
+  </div>
+</nav>
+<!-- <nav class="navbar bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">
       Rick&Morty
     </a>
-    <div class="btn-group dropstart">
-      <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-        Favorites
-      </button>
-      <ul class="dropdown-menu p-2">
-        <div class="d-flex justify-content-between">
-          <li id="favs"></li>
-          <button onclick="delete_favorite(person_favorite)">
-            <span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                class="bi bi-trash-fill" viewBox="0 0 16 16">
-                <path
-                  d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-              </svg>
-            </span>
-          </button>
-          
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="#">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/login">Login</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/private">Private</a>
+    </li>
+      <div class="btn-group dropstart">
+        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          Favorites
+        </button>
+        <ul class="dropdown-menu p-2">
+          <div class="d-flex justify-content-between">
+            <li id="favs"></li>
+            <button onclick="delete_favorite(person_favorite)">
+              <span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-trash-fill" viewBox="0 0 16 16">
+                  <path
+                    d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                </svg>
+              </span>
+            </button>
+          </div>
         </div>
         <script>
           let person_favorite = JSON.parse(localStorage.getItem('favorites'))
@@ -27,6 +84,6 @@
           document.getElementById('favs').innerHTML = person_favorite;
         </script>
       </ul>
-    </div>
+    
   </div>
-</nav>
+</nav> -->

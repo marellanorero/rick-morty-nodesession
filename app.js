@@ -4,10 +4,15 @@ const express = require('express');
 const fileupload = require('express-fileupload');
 const path = require('path');
 const router = require('./routes')
-const PORT = process.env.PORT || 5000;
-const HOST = process.env.HOST  || 'localhost';
+const session = require('express-session');
 
 const app = express();
+
+app.use(session({
+    secret: '987f4bd6d4315c10b2ec70a46',
+    saveUninitialized: false,
+    resave: true,
+}));
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -17,10 +22,12 @@ app.use(express.static(path.join(__dirname, 'uploads')));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+
 app.use(fileupload());
 
 app.use(router);
 
-app.listen(PORT, () => {
-    console.log(`Server running at http://${HOST}:${PORT}`)
+app.listen(5000, () => {
+    console.log(`Server running at http://localhost:5000`)
 })
